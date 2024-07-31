@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:maktabati_app/constant.dart';
 import 'package:maktabati_app/features/splash/presentation/views/splash_view.dart';
 
 void main() {
@@ -12,8 +13,11 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
-      home: SplashView(),
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark()
+          .copyWith(scaffoldBackgroundColor: kPrimaryColor),
+      home: const SplashView(),
     );
   }
 }
