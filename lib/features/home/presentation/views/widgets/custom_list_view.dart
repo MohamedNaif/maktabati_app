@@ -10,7 +10,7 @@ class CustomListView extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.23,
       child: Padding(
-        padding: const EdgeInsets.only(left: 18),
+        padding: const EdgeInsets.only(left: 5),
         child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
