@@ -1,13 +1,10 @@
-
-
-
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/style.dart';
 import 'book_rating.dart';
 
-class BookDetails extends StatelessWidget {
-  const BookDetails({
+class ItemDetails extends StatelessWidget {
+  const ItemDetails({
     super.key,
   });
 

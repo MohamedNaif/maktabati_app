@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/assets.dart';
-import 'book_detailes.dart';
+import 'item_detailes.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
   const BestSellerListViewItem({super.key});
@@ -28,7 +28,7 @@ class BestSellerListViewItem extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 20),
-            const BookDetails()
+            const ItemDetails()
           ],
         ),
       ),
