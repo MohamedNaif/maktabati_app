@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:maktabati_app/features/home/presentation/views/home_view.dart';
 
 import '../../../../../constant.dart';
+import '../../../../../core/utils/app_router.dart';
 import '../../../../../core/utils/assets.dart';
 import 'slide_animation.dart';
 
@@ -55,9 +57,13 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void navigateToHome() {
-    Future.delayed(const Duration(seconds: 2), () {
-      Get.to(() => const HomeView(),
-          transition: Transition.fade, duration: kTranstionDuration);
-    });
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        GoRouter.of(context).push('/homeView');
+        // Get.to(() => const HomeView(),
+        //     transition: Transition.fade, duration: kTranstionDuration);
+      },
+    );
   }
 }
