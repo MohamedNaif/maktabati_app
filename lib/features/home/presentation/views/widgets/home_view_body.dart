@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/style.dart';
+import 'best_seller_list_view_item.dart';
 import 'custom_app_bar.dart';
 import 'custom_list_view.dart';
 
@@ -25,7 +26,11 @@ class HomeViewBody extends StatelessWidget {
               'Best Seller',
               style: Styles.textStyle18,
             ),
-          )
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          BestSellerListViewItem()
         ],
       ),
     );
