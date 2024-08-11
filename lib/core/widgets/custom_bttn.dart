@@ -2,11 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:maktabati_app/core/utils/style.dart';
 
 class CustomBttn extends StatelessWidget {
-  const CustomBttn({super.key, required this.backgroundColor, required this.textColor,  this.borderRadius});
+  const CustomBttn(
+      {super.key,
+      required this.backgroundColor,
+      required this.textColor,
+      this.borderRadius,
+      required this.text});
 
   final Color backgroundColor;
   final Color textColor;
   final BorderRadius? borderRadius;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +22,11 @@ class CustomBttn extends StatelessWidget {
           style: TextButton.styleFrom(
               backgroundColor: backgroundColor,
               shape: RoundedRectangleBorder(
-                  borderRadius:borderRadius ?? BorderRadius.circular(112))),
+                  borderRadius: borderRadius ?? BorderRadius.circular(112))),
           onPressed: () {},
           child: Text(
-            r'19.99$',
+            text,
+           
             style: Styles.textStyle18.copyWith(
               color: textColor,
               fontWeight: FontWeight.w900,

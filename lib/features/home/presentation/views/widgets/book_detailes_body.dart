@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
-import 'package:maktabati_app/features/home/presentation/views/widgets/best_seller_list_view_item.dart';
+
 import 'package:maktabati_app/features/home/presentation/views/widgets/book_rating.dart';
 
 import '../../../../../core/utils/style.dart';
-import '../../../../../core/widgets/custom_bttn.dart';
+
 import 'book_action.dart';
 import 'custom_book_detailes_app_bar.dart';
 import 'custom_list_view_item.dart';
+import 'similar_books_list_view.dart';
 
 class BookDetailesBody extends StatelessWidget {
   const BookDetailesBody({super.key});
@@ -20,7 +19,7 @@ class BookDetailesBody extends StatelessWidget {
       children: [
         const CustomBookDetailesAppBar(),
         SizedBox(
-          height: MediaQuery.sizeOf(context).height * 0.35,
+          height: MediaQuery.sizeOf(context).height * 0.3,
           child: const CustomListViewItem(),
         ),
         const SizedBox(
@@ -42,7 +41,26 @@ class BookDetailesBody extends StatelessWidget {
         const BookRating(
           mainAxisAlignment: MainAxisAlignment.center,
         ),
-        const BookAction()
+        const SizedBox(
+          height: 37,
+        ),
+        const BookAction(),
+        const SizedBox(
+          height: 50,
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 38.0),
+          child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text('You cas also read', style: Styles.textStyle18)),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        const SimilarBooksListView(),
+        const SizedBox(
+          height: 40,
+        ),
       ],
     ));
   }
