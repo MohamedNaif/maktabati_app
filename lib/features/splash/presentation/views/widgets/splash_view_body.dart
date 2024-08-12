@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:maktabati_app/features/home/presentation/views/home_view.dart';
 
-import '../../../../../constant.dart';
-import '../../../../../core/utils/app_router.dart';
+
+
 import '../../../../../core/utils/assets.dart';
 import 'slide_animation.dart';
 
