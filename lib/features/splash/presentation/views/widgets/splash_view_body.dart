@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-
-
-
 import '../../../../../core/utils/assets.dart';
 import 'slide_animation.dart';
 

@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 
 class SlideTextAnimation extends StatelessWidget {
@@ -8,7 +5,8 @@ class SlideTextAnimation extends StatelessWidget {
     super.key,
     required AnimationController animationController,
     required Animation<Offset> animation,
-  }) : _animationController = animationController, _animation = animation;
+  })  : _animationController = animationController,
+        _animation = animation;
 
   final AnimationController _animationController;
   final Animation<Offset> _animation;

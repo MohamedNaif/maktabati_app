@@ -26,7 +26,6 @@ class CustomBttn extends StatelessWidget {
           onPressed: () {},
           child: Text(
             text,
-           
             style: Styles.textStyle18.copyWith(
               color: textColor,
               fontWeight: FontWeight.w900,
