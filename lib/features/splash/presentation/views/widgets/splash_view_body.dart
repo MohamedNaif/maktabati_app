@@ -1,25 +1,27 @@
+import 'package:bookly/core/utils/app_router.dart';
+import 'package:bookly/core/utils/assets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../../core/utils/assets.dart';
-import 'slide_animation.dart';
+import 'sliding_text.dart';
 
-class SplashViewBody extends StatefulWidget {
-  const SplashViewBody({super.key});
+class SplashViewbody extends StatefulWidget {
+  const SplashViewbody({Key? key}) : super(key: key);
 
   @override
-  State<SplashViewBody> createState() => _SplashViewBodyState();
+  State<SplashViewbody> createState() => _SplashViewbodyState();
 }
 
-class _SplashViewBodyState extends State<SplashViewBody>
+class _SplashViewbodyState extends State<SplashViewbody>
     with SingleTickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<Offset> _animation;
+  late AnimationController animationController;
+  late Animation<Offset> slidingAnimation;
 
   @override
   void initState() {
     super.initState();
-    initSlideAnimation();
+    initSlidingAnimation();
 
     navigateToHome();
   }
@@ -27,7 +29,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
   @override
   void dispose() {
     super.dispose();
-    _animationController.dispose();
+
+    animationController.dispose();
   }
 
   @override
@@ -36,29 +39,38 @@ class _SplashViewBodyState extends State<SplashViewBody>
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Image.asset(AppAssets.logo),
-        SlideTextAnimation(
-            animationController: _animationController, animation: _animation)
+        Image.asset(AssetsData.logo),
+        const SizedBox(
+          height: 4,
+        ),
+        SlidingText(slidingAnimation: slidingAnimation),
       ],
     );
   }
 
-  void initSlideAnimation() {
-    _animationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+  void initSlidingAnimation() {
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
 
-    _animation = Tween<Offset>(begin: const Offset(0, 2), end: Offset.zero)
-        .animate(_animationController);
-    _animationController.forward();
+    slidingAnimation =
+        Tween<Offset>(begin: const Offset(0, 2), end: Offset.zero)
+            .animate(animationController);
+
+    animationController.forward();
   }
 
   void navigateToHome() {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        GoRouter.of(context).push('/homeView');
         // Get.to(() => const HomeView(),
-        //     transition: Transition.fade, duration: kTranstionDuration);
+        //     // calculations
+        //     transition: Transition.fade,
+        //     duration: kTranstionDuration);
+
+        GoRouter.of(context).push(AppRouter.kHomeView);
       },
     );
   }

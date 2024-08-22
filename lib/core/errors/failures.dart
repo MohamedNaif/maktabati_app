@@ -1,57 +1,50 @@
 import 'package:dio/dio.dart';
 
 abstract class Failure {
-  final String errorMessage;
-  Failure(this.errorMessage);
+  final String errMessage;
+
+  const Failure(this.errMessage);
 }
 
 class ServerFailure extends Failure {
-  ServerFailure(super.errorMessage);
+  ServerFailure(super.errMessage);
 
-  factory ServerFailure.fromDioError(DioException dioError) {
+  factory ServerFailure.fromDioError(DioError dioError) {
     switch (dioError.type) {
-      case DioExceptionType.connectionTimeout:
-        // Handle connection timeout
-        return ServerFailure(
-            "Connection timeout. Please check your internet connection.");
+      case DioErrorType.connectTimeout:
+        return ServerFailure('Connection timeout with ApiServer');
 
-      case DioExceptionType.sendTimeout:
-        // Handle send timeout
-        return ServerFailure(
-            "Send timeout. Unable to send data. Please try again later.");
+      case DioErrorType.sendTimeout:
+        return ServerFailure('Send timeout with ApiServer');
 
-      case DioExceptionType.receiveTimeout:
-        // Handle receive timeout
-        return ServerFailure(
-            "Receive timeout. Unable to receive data. Please try again later.");
+      case DioErrorType.receiveTimeout:
+        return ServerFailure('Receive timeout with ApiServer');
 
-      case DioExceptionType.badCertificate:
-        // Handle bad certificate
-        return ServerFailure(
-            "Invalid certificate. Please check your network settings.");
+      case DioErrorType.response:
+        return ServerFailure.fromResponse(
+            dioError.response!.statusCode, dioError.response!.data);
+      case DioErrorType.cancel:
+        return ServerFailure('Request to ApiServer was canceld');
 
-      case DioExceptionType.badResponse:
-        // Handle bad response
-        return ServerFailure(
-            "Bad response from server. Please try again later.");
+      case DioErrorType.other:
+        if (dioError.message.contains('SocketException')) {
+          return ServerFailure('No Internet Connection');
+        }
+        return ServerFailure('Unexpected Error, Please try again!');
+      default:
+        return ServerFailure('Opps There was an Error, Please try again');
+    }
+  }
 
-      case DioExceptionType.cancel:
-        // Handle request cancellation
-        return ServerFailure("Request cancelled. Please try again.");
-
-      case DioExceptionType.connectionError:
-        // Handle connection error
-        return ServerFailure(
-            "Connection error. Please check your internet connection.");
-
-      case DioExceptionType.unknown:
-        // Handle unknown errors
-        return ServerFailure(
-            "An unknown error occurred. Please try again later.");
-
-        // defult:
-        // return ServerFailure(
-        //     "An unknown error occurred. Please try again later.");
+  factory ServerFailure.fromResponse(int? statusCode, dynamic response) {
+    if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+      return ServerFailure(response['error']['message']);
+    } else if (statusCode == 404) {
+      return ServerFailure('Your request not found, Please try later!');
+    } else if (statusCode == 500) {
+      return ServerFailure('Internal Server error, Please try later');
+    } else {
+      return ServerFailure('Opps There was an Error, Please try again');
     }
   }
 }
